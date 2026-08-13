@@ -27,7 +27,7 @@ Management suspects that some employees may be using TOR browsers to bypass netw
 
 ### 1. Searched the `DeviceFileEvents` Table
 
-Searched for any file that had the string "tor" in it and discovered what looks like the user "employee" downloaded a TOR installer, did something that resulted in many TOR-related files being copied to the desktop on Aug. 13, 2026 at 9:06:12 A.M. These events began on Aug. 13, 2026 at 8:56:03 A.M.
+Searched for any file that had the string "tor" in it and discovered what looks like the user "jen1589" downloaded a TOR installer, did something that resulted in many TOR-related files being copied to the desktop on Aug. 13, 2026 at 9:06:12 A.M. These events began on Aug. 13, 2026 at 8:56:03 A.M.
 
 **Query used to locate events:**
 
