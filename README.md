@@ -136,7 +136,7 @@ DeviceNetworkEvents
 - **Timestamps:**
   - `Aug 13, 2026 8:59:23 AM` - Connected to `192.42.116.116` on port `443`.
   - `Aug 13, 2026 8:50:50 AM` - Local connection to `127.0.0.1` on port `9150`.
-- **Event:** Additional TOR network connections were established, indicating ongoing activity by user "employee" through the TOR browser.
+- **Event:** Additional TOR network connections were established, indicating ongoing activity by user "jen1589" through the TOR browser.
 - **Action:** Multiple successful connections detected.
 
 
