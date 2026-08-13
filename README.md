@@ -27,16 +27,14 @@ Management suspects that some employees may be using TOR browsers to bypass netw
 
 ### 1. Searched the `DeviceFileEvents` Table
 
-Searched for any file that had the string "tor" in it and discovered what looks like the user "employee" downloaded a TOR installer, did something that resulted in many TOR-related files being copied to the desktop, and the creation of a file called `tor-shopping-list.txt` on the desktop at `2024-11-08T22:27:19.7259964Z`. These events began at `2024-11-08T22:14:48.6065231Z`.
+Searched for any file that had the string "tor" in it and discovered what looks like the user "employee" downloaded a TOR installer, did something that resulted in many TOR-related files being copied to the desktop, and the creation of a file called `tor-shopping-list.txt` on the desktop on Aug. 13, 2026 at 9:06:12 A.M. These events began on Aug. 13, 2026 at 8:56:03 A.M.
 
 **Query used to locate events:**
 
 ```kql
 DeviceFileEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where InitiatingProcessAccountName == "employee"  
-| where FileName contains "tor"  
-| where Timestamp >= datetime(2024-11-08T22:14:48.6065231Z)  
+| where DeviceName == "my-vm-dh"    
+| where FileName contains "tor"    
 | order by Timestamp desc  
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, SHA256, Account = InitiatingProcessAccountName
 ```
@@ -46,15 +44,15 @@ DeviceFileEvents
 
 ### 2. Searched the `DeviceProcessEvents` Table
 
-Searched for any `ProcessCommandLine` that contained the string "tor-browser-windows-x86_64-portable-14.0.1.exe". Based on the logs returned, at `2024-11-08T22:16:47.4484567Z`, an employee on the "threat-hunt-lab" device ran the file `tor-browser-windows-x86_64-portable-14.0.1.exe` from their Downloads folder, using a command that triggered a silent installation.
+Searched for any `ProcessCommandLine` that contained the string "tor-browser-windows-x86_64-portable-15.0.19.exe". Based on the logs returned, at `2024-11-08T22:16:47.4484567Z`, an employee on the "my-vm-dh" device ran the file `tor-browser-windows-x86_64-portable-15.0.19.exe` from their Downloads folder, using a command that triggered a silent installation.
 
 **Query used to locate event:**
 
 ```kql
 
 DeviceProcessEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.0.1.exe"  
+| where DeviceName == "my-vm-dh"  
+| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-15.0.19.exe"  
 | project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
 ```
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/b07ac4b4-9cb3-4834-8fac-9f5f29709d78">
@@ -69,7 +67,7 @@ Searched for any indication that user "employee" actually opened the TOR browser
 
 ```kql
 DeviceProcessEvents  
-| where DeviceName == "threat-hunt-lab"  
+| where DeviceName == "my-vm-dh"  
 | where FileName has_any ("tor.exe", "firefox.exe", "tor-browser.exe")  
 | project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine  
 | order by Timestamp desc
